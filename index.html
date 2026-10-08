@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfwork Oggetti 2</title>
+</head>
+<body>
+
+    <script>
+        let rubrica = {
+            contacts: [
+                { nome: 'Nicola', telefono: '3331111111' },
+                { nome: 'Lorenzo', telefono: '3332222222' },
+                { nome: 'Paola', telefono: '3333333333' },
+                { nome: 'Jenny', telefono: '3334444444' }
+            ],
+
+            mostraContatti: function () {
+                this.contacts.forEach(contatto => {
+                    console.log(`${contatto.nome}: ${contatto.telefono}`);
+                });
+            },
+
+            mostraContatto: function (nome) {
+                let contatto = this.contacts.find(contatto => contatto.nome === nome);
+
+                if (contatto) {
+                    console.log(`${contatto.nome}: ${contatto.telefono}`);
+                } else {
+                    console.log(`Contatto ${nome} non trovato`);
+                }
+            },
+
+            aggiungiContatto: function (nome, telefono) {
+                this.contacts.push({ nome: nome, telefono: telefono });
+                console.log(`Contatto ${nome} aggiunto`);
+            },
+
+            eliminaContatto: function (nome) {
+                let indice = this.contacts.findIndex(contatto => contatto.nome === nome);
+
+                if (indice !== -1) {
+                    this.contacts.splice(indice, 1);
+                    console.log(`Contatto ${nome} eliminato`);
+                } else {
+                    console.log(`Contatto ${nome} non trovato`);
+                }
+            },
+
+            modificaContatto: function (nome, nuovoTelefono) {
+                let contatto = this.contacts.find(contatto => contatto.nome === nome);
+
+                if (contatto) {
+                    contatto.telefono = nuovoTelefono;
+                    console.log(`Contatto ${nome} modificato`);
+                } else {
+                    console.log(`Contatto ${nome} non trovato`);
+                }
+            }
+        };
+
+        console.log("--- Tutti i contatti ---");
+        rubrica.mostraContatti();
+
+        console.log("--- Un singolo contatto ---");
+        rubrica.mostraContatto('Paola');
+
+        console.log("--- Aggiunta ---");
+        rubrica.aggiungiContatto('Luis', '3335555555');
+        rubrica.mostraContatti();
+
+        console.log("--- Eliminazione ---");
+        rubrica.eliminaContatto('Lorenzo');
+        rubrica.mostraContatti();
+
+        console.log("--- Modifica (extra) ---");
+        rubrica.modificaContatto('Jenny', '3339999999');
+        rubrica.mostraContatto('Jenny');
+
+        console.log("--- Contatto inesistente ---");
+        rubrica.mostraContatto('Marco');
+    </script>
+</body>
+</html>
